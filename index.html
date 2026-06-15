@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Quiz for Jija Ji! 😉</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .alert-text {
+            font-size: 18px;
+            color: #d9534f;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .math-equation {
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz">
+    </div>
+
+<script>
+let currentStep = 1;
+
+function renderQuiz() {
+    const container = document.getElementById('quiz');
+    container.innerHTML = ""; // Clear content
+
+    if (currentStep === 1) {
+        container.innerHTML = `
+            <h2>Kaise ho jija?</h2>
+            <div class="btn-container">
+                <button onclick="handleQ1('thik')">Option 1: thik hu</button>
+                <button onclick="handleQ1('kush')">Option 2: bahut kush hu</button>
+            </div>
+        `;
+    } 
+    else if (currentStep === "q1_kush_response") {
+        container.innerHTML = `
+            <h2>I know becouse you see my message 😎</h2>
+            <div class="btn-container">
+                <button onclick="goToStep(2)">Next Question ➡️</button>
+            </div>
+        `;
+    }
+    else if (currentStep === 2) {
+        container.innerHTML = `
+            <h2>Kaha ho?</h2>
+            <div class="btn-container">
+                <button onclick="handleQ2('indore')">Option 1: indore</button>
+                <button onclick="handleQ2('mahidpur')">Option 2: mahidpur</button>
+                <button onclick="handleQ2('maje')">Option 3: maje mai</button>
+            </div>
+        `;
+    }
+    else if (currentStep === "q2_maje_response") {
+        container.innerHTML = `
+            <p class="alert-text">Are indore or mahidpur mai se ek tick kar dete!</p>
+            <div class="btn-container">
+                <button onclick="goToStep(3)">Next Question ➡️</button>
+            </div>
+        `;
+    }
+    else if (currentStep === "q2_normal_response") {
+        container.innerHTML = `
+            <h2>Badiya hai .</h2>
+            <div class="btn-container">
+                <button onclick="goToStep(3)">Next Question ➡️</button>
+            </div>
+        `;
+    }
+    else if (currentStep === 3) {
+        container.innerHTML = `
+            <h2>Which food did you like?</h2>
+            <div class="btn-container">
+                <button onclick="goToStep(4)">1. Dosa</button>
+                <button onclick="goToStep(4)">2. pav bhaji</button>
+                <button onclick="goToStep(4)">3. Chinese</button>
+                <button onclick="goToStep(4)">4. dal bati</button>
+                <button onclick="goToStep(4)">5. kartik k sath ka khana</button>
+            </div>
+        `;
+    }
+    else if (currentStep === 4) {
+        container.innerHTML = `
+            <h2>Solve the equation:</h2>
+            <div class="math-equation">∫ (x³ + 1)/(x² + 1) dx</div>
+            <div class="btn-container">
+                <button onclick="goToStep(5)">Option 1: muje nahi pata</button>
+                <button onclick="goToStep(5)">Option 2: mai bio wale hu</button>
+                <button onclick="goToStep(5)">Option 3: time nahi hai</button>
+                <button onclick="goToStep(5)">Option 4: ye kaisa majak hai</button>
+            </div>
+        `;
+    }
+    else if (currentStep === 5) {
+        container.innerHTML = `
+            <h2 style="color: red;">⚠️ Very very important news important ⚠️</h2>
+            <div class="btn-container">
+                <button onclick="goToStep(6)">Are you ready?</button>
+            </div>
+        `;
+    }
+    else if (currentStep === 6) {
+        container.innerHTML = `
+            <h1 style="color: darkred;">🚨 Breaking news 🚨</h1>
+            <h2 style="font-size: 28px;">Amitab Bachchan is dad 💀😭</h2>
+        `;
+    }
+}
+
+function handleQ1(choice) {
+    if (choice === 'thik') {
+        // Option 1 triggers "move away" action
+        alert("Moving away...");
+        window.location.href = "https://www.google.com"; // Redirects away
+    } else {
+        currentStep = "q1_kush_response";
+        renderQuiz();
+    }
+}
+
+function handleQ2(choice) {
+    if (choice === 'maje') {
+        currentStep = "q2_maje_response";
+    } else {
+        currentStep = "q2_normal_response";
+    }
+    renderQuiz();
+}
+
+function goToStep(stepNum) {
+    currentStep = stepNum;
+    renderQuiz();
+}
+
+// Initial initialization
+renderQuiz();
+</script>
+
+</body>
+</html>
+
